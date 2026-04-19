@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resort Wi-Fi Manager | Admin Dashboard</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-umbrella-beach"></i>
+                <h1>Azure Coast Resort</h1>
+            </div>
+            <div class="header-actions">
+                <button id="addRoomBtn" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Add New Room
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="dashboard-controls">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="searchBar" placeholder="Search by Room Number...">
+            </div>
+            <div class="stats">
+                <span id="totalRooms">Total Rooms: 0</span>
+            </div>
+        </section>
+
+        <section id="roomGrid" class="room-grid">
+            <!-- Room cards will be injected here -->
+            <div class="empty-state">
+                <i class="fas fa-wifi"></i>
+                <p>No rooms added yet. Click 'Add New Room' to get started.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for Add/Edit Room -->
+    <div id="roomModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Room</h2>
+                <span class="close-btn">&times;</span>
+            </div>
+            <form id="roomForm">
+                <input type="hidden" id="editIndex">
+                <div class="form-group">
+                    <label for="roomNumber">Room Number</label>
+                    <input type="text" id="roomNumber" required placeholder="e.g. 101, A-12">
+                </div>
+                <div class="form-group">
+                    <label for="wifiName">Wi-Fi Name (SSID)</label>
+                    <input type="text" id="wifiName" required placeholder="e.g. Resort_Guest_101">
+                </div>
+                <div class="form-group">
+                    <label for="wifiPassword">Wi-Fi Password</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="wifiPassword" required placeholder="Enter password">
+                        <button type="button" class="toggle-pwd-btn" id="toggleModalPwd">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="saveBtn">Save Room</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Delete Confirmation Modal (Optional but nice) -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content confirm-modal">
+            <h3>Confirm Delete</h3>
+            <p>Are you sure you want to delete room <span id="confirmRoomNum"></span>? This action cannot be undone.</p>
+            <div class="modal-footer">
+                <button id="cancelDelete" class="btn btn-secondary">Cancel</button>
+                <button id="confirmDelete" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
